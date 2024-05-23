@@ -1,3 +1,7 @@
+# Welcome to my Website!
+
+_________________
+
 # Nuxt UI Minimal Starter
 
 This code serves as a template for the student project.
