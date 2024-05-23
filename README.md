@@ -1,5 +1,5 @@
 # Nuxt UI Minimal Starter
-
+123
 This code serves as a template for the student project.
 
 ## Project Structure
