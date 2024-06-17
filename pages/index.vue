@@ -23,6 +23,15 @@
       </button>
     </div>
 
+     <!-- Display if user is logged in -->
+     <div v-if="user">
+      <div>User is logged in: {{ user.email }}</div>
+      <button @click="logout">Logout</button>
+    </div>
+    <div v-else>
+      <div>No user is logged in</div>
+    </div>
+
   </NuxtLayout>
 </template>
 
@@ -34,29 +43,38 @@ const store = useWebsiteStore()
 await callOnce(store.fetchData)
 
 // Login
-import { ref } from 'vue';
-import { useSupabaseClient } from '@supabase/supabase-js';
+// import { ref } from 'vue';
+// import { useRouter } from 'vue-router';
 
 const email = ref('');
 const password = ref('');
 const isLogin = ref(true);
 
 const client = useSupabaseClient();
+const router = useRouter();
 
 const handleAuth = async () => {
   if (isLogin.value) {
-    const { error } = await client.auth.signInWithPassword({ email: email.value, password: password.value });
+    const { data, error } = await client.auth.signInWithPassword({
+      email: email.value,
+      password: password.value
+    });
     if (error) {
       alert('Login failed: ' + error.message);
     } else {
       alert('Login successful!');
+      router.push(`/page/${data.user.id}`);
     }
   } else {
-    const { error } = await client.auth.signUp({ email: email.value, password: password.value });
+    const { data, error } = await client.auth.signUp({
+      email: email.value,
+      password: password.value
+    });
     if (error) {
       alert('Registration failed: ' + error.message);
     } else {
       alert('Registration successful! Please check your email for verification.');
+      router.push(`/page/${data.user.id}`);
     }
   }
 };
