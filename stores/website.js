@@ -6,7 +6,7 @@ export const useWebsiteStore = defineStore('websiteStore', () => {
 
     async function fetchData() {
         const client = useSupabaseClient();
-        const {data, error} = await client.from('data')
+        const {data, error} = await client.from('actors')
             .select('*')
             .limit(100);
         if (data) {
