@@ -2,8 +2,8 @@
   <div id="route-id">
     <div v-if="user">
       <div v-if="user.id === route.params.id">
-        Page {{ route.params.id }}
-        <div>User is logged in: {{ user.email }}</div>
+        Herzlich Willkommen!
+        Du bist eingeloggt mit {{ user.email }}
         <button @click="logout">Logout</button>
       </div>
       <div v-else>
