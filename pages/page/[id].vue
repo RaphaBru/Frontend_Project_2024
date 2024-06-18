@@ -38,7 +38,7 @@
               </select>
             </div>
             <div>
-              <button @click="submitTravel">Submit</button>
+              <UButton icon="i-heroicons-arrow-up-on-square" @click="submitTravel">Submit</UButton>
             </div>
           </div>
 
