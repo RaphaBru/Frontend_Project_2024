@@ -11,8 +11,13 @@
       <UTable id="data-table" :rows="store.tableData"/>
     </UCard>
 
-    <!-- Login/Register Form -->
-    <div class="auth-container">
+    <!-- Display if user is logged in -->
+    <div v-if="user" class="personal-page-container">
+      <button @click="goToPersonalPage" class="personal-page-button">Go to your page</button>
+    </div>
+
+    <!-- Login/Register Form if user is not logged in -->
+    <div v-else class="auth-container">
       <form @submit.prevent="handleAuth">
         <input type="email" v-model="email" placeholder="Email" required />
         <input type="password" v-model="password" placeholder="Password" required />
@@ -21,17 +26,8 @@
       <button @click="toggleAuthMode">
         {{ isLogin ? 'Need an account? Register' : 'Already have an account? Login' }}
       </button>
-    </div>
-
-     <!-- Display if user is logged in -->
-     <div v-if="user">
-      <div>User is logged in: {{ user.email }}</div>
-      <button @click="logout">Logout</button>
-    </div>
-    <div v-else>
       <div>No user is logged in</div>
     </div>
-
   </NuxtLayout>
 </template>
 
@@ -43,15 +39,13 @@ const store = useWebsiteStore()
 await callOnce(store.fetchData)
 
 // Login
-// import { ref } from 'vue';
-// import { useRouter } from 'vue-router';
-
 const email = ref('');
 const password = ref('');
 const isLogin = ref(true);
 
 const client = useSupabaseClient();
 const router = useRouter();
+const user = useSupabaseUser();
 
 const handleAuth = async () => {
   if (isLogin.value) {
@@ -81,6 +75,22 @@ const handleAuth = async () => {
 
 const toggleAuthMode = () => {
   isLogin.value = !isLogin.value;
+};
+
+const goToPersonalPage = () => {
+  if (user.value) {
+    router.push(`/page/${user.value.id}`);
+  }
+};
+
+const logout = async () => {
+  const { error } = await client.auth.signOut();
+  if (error) {
+    alert('Logout failed: ' + error.message);
+  } else {
+    alert('Logout successful!');
+    router.push('/');
+  }
 };
 
 </script>
@@ -119,6 +129,27 @@ const toggleAuthMode = () => {
 
 .auth-container button:hover {
   background-color: #0056b3;
+}
+
+/* Personal Page Button */
+.personal-page-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.personal-page-button {
+  background-color: maroon;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.personal-page-button:hover {
+  background-color: #800000; /* Darker maroon for hover effect */
 }
 
 /* Beispiel */
