@@ -21,7 +21,7 @@ export default defineNuxtConfig({
     // Head Elemente welche über die ganze Applikation gültig sind können hier konfiguriert werden.
     app: {
         head: {
-            title: 'CDS Frontend',
+            title: 'Traveller',
             charset: 'utf-8',
             viewport: 'width=device-width, initial-scale=1',
         }
