@@ -26,7 +26,7 @@
       <button @click="toggleAuthMode">
         {{ isLogin ? 'Need an account? Register' : 'Already have an account? Login' }}
       </button>
-      <div>No user is logged in</div>
+      <div>Log in to make your own Travel Journal!</div>
     </div>
   </NuxtLayout>
 </template>
