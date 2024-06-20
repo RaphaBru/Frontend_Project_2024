@@ -31,6 +31,9 @@
   </NuxtLayout>
 </template>
 
+<!-- END TEMPLATE -->
+<!-- START SCRIPT -->
+
 <script setup lang="js">
 
 // Beispiel: Daten aus Supabase Tabelle holen und anzeigen
@@ -57,7 +60,7 @@ const handleAuth = async () => {
       alert('Login failed: ' + error.message);
     } else {
       alert('Login successful!');
-      router.push(`/page/${data.user.id}`);
+      router.push(`/user-${data.user.id}`);
     }
   } else {
     const { data, error } = await client.auth.signUp({
@@ -68,7 +71,7 @@ const handleAuth = async () => {
       alert('Registration failed: ' + error.message);
     } else {
       alert('Registration successful! Please check your email for verification.');
-      router.push(`/page/${data.user.id}`);
+      router.push(`/user-${data.user.id}`);
     }
   }
 };
@@ -79,7 +82,7 @@ const toggleAuthMode = () => {
 
 const goToPersonalPage = () => {
   if (user.value) {
-    router.push(`/page/${user.value.id}`);
+    router.push(`/user-${user.value.id}`);
   }
 };
 
@@ -94,6 +97,9 @@ const logout = async () => {
 };
 
 </script>
+
+<!-- END SCRIPT -->
+<!-- START STYLE -->
 
 <style lang="css" scoped>
 

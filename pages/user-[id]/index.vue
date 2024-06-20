@@ -52,7 +52,7 @@
 
             <!-- Edit Entries Button -->
             <div class="edit-entries-container">
-              <UButton icon="i-heroicons-pencil" @click="goToEditPage">Edit Entries</UButton>
+              <UButton icon="i-heroicons-pencil-square" @click="goToEditPage">Edit Entries</UButton>
             </div>
     
           </div>
@@ -63,16 +63,23 @@
           </div>
 
         </div>
+
+
+        <!-- Nutzer nicht auf eigener Seite -->
         <div v-else>
           <div>Access Denied. Redirecting to your page...</div>
         </div>
       </div>
+      <!-- Nicht eingeloggt -->
       <div v-else>
         <div>No user is logged in. Redirecting to login...</div>
       </div>
     </div>
   </NuxtLayout>
 </template>
+
+<!-- END TEMPLATE -->
+<!-- START SCRIPT -->
 
 <script setup lang="js">
 
@@ -97,7 +104,7 @@ onMounted(() => {
   // Immer auf eigene Seite umleiten (url = user id)
   } else if (user.value.id !== route.params.id) {
     console.log('User ID does not match route parameter');
-    router.push(`/page/${user.value.id}`);
+    router.push(`/user-${user.value.id}`);
 
   // Standardfall: Nutzer ist auf eigener Seite und eingeloggt
   } else {
@@ -146,12 +153,14 @@ await callOnce(tableStore.fetchData)
 
 // Navigate to Edit Page
 const goToEditPage = () => {
-  router.push(`/page/${user.value.id}/edit`);
+  router.push(`/user-${user.value.id}/edit`);
 };
 
 </script>
 
-<!-- Styling -->
+<!-- END SCRIPT -->
+<!-- START STYLE -->
+
 <style scoped>
 #route-id {
   padding: 8px;
@@ -198,4 +207,23 @@ const goToEditPage = () => {
 .travel-form button:hover {
   background-color: rgb(98, 0, 0);
 }
+
+.edit-entries-container {
+  margin-top: 11px;
+}
+
+.edit-entries-container button {
+  background-color: maroon;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px;
+  cursor: pointer;
+  align-self: flex-st art;
+}
+
+.edit-entries-container button:hover {
+  background-color: rgb(98, 0, 0);
+}
+
 </style>

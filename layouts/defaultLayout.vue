@@ -57,12 +57,12 @@ const logout = async () => {
   color: white;
   border: none;
   border-radius: 4px;
-  padding: 5px;
+  padding: 5px 10px;
   cursor: pointer;
 }
 
 .logout-button:hover {
-  background-color: #0056b3;
+  background-color: #5e6063;
 }
 
 @media (max-width: 600px) {
