@@ -89,7 +89,6 @@ onMounted(() => {
 });
 
 // Pinia Store für Datentabelle (Supabase)
-import {useTableStore} from "~/stores/datatable.js";
 const tableStore = useTableStore();
 await callOnce(tableStore.fetchData);
 

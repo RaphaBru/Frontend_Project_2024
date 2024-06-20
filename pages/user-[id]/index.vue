@@ -147,9 +147,11 @@ const submitTravel = async () => {
 };
 
 // Pinia Store für Datentabelle (Supabase)
-import {useTableStore} from "~/stores/datatable.js";
 const tableStore = useTableStore()
 await callOnce(tableStore.fetchData)
+
+// Autocomplete (Feld mit Country)
+
 
 // Navigate to Edit Page
 const goToEditPage = () => {
