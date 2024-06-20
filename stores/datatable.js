@@ -1,13 +1,14 @@
 import {defineStore} from "pinia"
 import {ref} from "vue"
 
-export const useWebsiteStore = defineStore('websiteStore', () => {
+export const useTableStore = defineStore('tableStore', () => {
     const tableData = ref()
 
     async function fetchData() {
         const client = useSupabaseClient();
-        const {data, error} = await client.from('actors')
-            .select('*')
+        const {data, error} = await client.from('travel')
+            .select('country, year, highlight, score')
+            .order('year', { ascending: false }) // Sorting by year in descending order
             .limit(100);
         if (data) {
             tableData.value = data

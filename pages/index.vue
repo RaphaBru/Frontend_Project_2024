@@ -8,7 +8,7 @@
       <div><NuxtLink to="/page/2">Page 2</NuxtLink></div>
     </div>
     <UCard id="data-table-container">
-      <UTable id="data-table" :rows="store.tableData"/>
+      <UTable id="data-table" :rows="tableStore.tableData"/>
     </UCard>
 
     <!-- Display if user is logged in -->
@@ -34,9 +34,9 @@
 <script setup lang="js">
 
 // Beispiel: Daten aus Supabase Tabelle holen und anzeigen
-import {useWebsiteStore} from "~/stores/website.js";
-const store = useWebsiteStore()
-await callOnce(store.fetchData)
+import {useTableStore} from "~/stores/datatable.js";
+const tableStore = useTableStore()
+await callOnce(tableStore.fetchData)
 
 // Login
 const email = ref('');
