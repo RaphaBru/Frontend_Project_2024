@@ -150,9 +150,6 @@ const submitTravel = async () => {
 const tableStore = useTableStore()
 await callOnce(tableStore.fetchData)
 
-// Autocomplete (Feld mit Country)
-
-
 // Navigate to Edit Page
 const goToEditPage = () => {
   router.push(`/user-${user.value.id}/edit`);
