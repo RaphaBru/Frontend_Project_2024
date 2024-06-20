@@ -2,7 +2,9 @@
   <NuxtLayout name="default-layout">
     <div>
       <h1>Hello</h1>
-      <div class="svg-container" v-html="svgContent"></div>
+      <div class="svg-container">
+        <div class="svg-wrapper" v-html="svgContent"></div>
+      </div>
     </div>
   </NuxtLayout>
 </template>
@@ -35,18 +37,15 @@ onMounted(() => {
 </script>
 
 <style scoped>
-h1 {
-  text-align: center;
-  margin-top: 20px;
-}
-
 .svg-container {
+  width: 100%;
+  height: auto;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start; /* Aligns the container to the left */
 }
 
-.svg-container svg {
-  max-width: 80%; /* Adjust as needed */
-  height: auto;
+.svg-wrapper {
+  max-width: auto;
+  border: 2px solid black; /* Adds a black border around the container */
 }
 </style>
