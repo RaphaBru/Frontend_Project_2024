@@ -2,7 +2,7 @@
   <NuxtLayout name="default-layout">
     <div>
       <h1>Hello</h1>
-      <div v-html="svgContent"></div>
+      <div class="svg-container" v-html="svgContent"></div>
     </div>
   </NuxtLayout>
 </template>
@@ -39,10 +39,14 @@ h1 {
   text-align: center;
   margin-top: 20px;
 }
-svg {
-  display: block;
-  margin: 20px auto;
-  max-width: 100%;
+
+.svg-container {
+  display: flex;
+  justify-content: center;
+}
+
+.svg-container svg {
+  max-width: 80%; /* Adjust as needed */
   height: auto;
 }
 </style>
