@@ -9,7 +9,7 @@ export const useTableStore = defineStore('tableStore', () => {
         const {data, error} = await client.from('travel')
             .select('country, year, highlight, score')
             .order('year', { ascending: false }) // Sorting by year in descending order
-            .limit(100);
+            .limit(200);
         if (data) {
             tableData.value = data
         } else {

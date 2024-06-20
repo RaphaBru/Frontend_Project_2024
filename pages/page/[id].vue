@@ -42,6 +42,26 @@
             </div>
           </div>
 
+          <!-- Tabelle (Pinia Store, Supabase) -->  
+          <!-- Nur anzeigen wenn Tabelle nicht leer ist -->
+          <div v-if="tableStore.tableData && tableStore.tableData.length">
+
+            <UCard id="data-table-container"> 
+              <UTable id="data-table" :rows="tableStore.tableData"/>
+            </UCard>
+
+            <!-- Edit Entries Button -->
+            <div class="edit-entries-container">
+              <UButton icon="i-heroicons-pencil" @click="goToEditPage">Edit Entries</UButton>
+            </div>
+    
+          </div>
+
+          <!-- Wenn die Tabelle leer ist: -->
+          <div v-else id="data-table-container">
+            Let's get started with your travel journal!
+          </div>
+
         </div>
         <div v-else>
           <div>Access Denied. Redirecting to your page...</div>
@@ -56,30 +76,39 @@
 
 <script setup lang="js">
 
+//  Routing
 const route = useRoute();
 const router = useRouter();
 const user = useSupabaseUser();
 const client = useSupabaseClient();
 
-// Form data
+// Datenformular
 const country = ref('');
 const year = ref(new Date().getFullYear());
 const highlight = ref('Nature');
 const score = ref(10);
 
 onMounted(() => {
+  // Umleiten auf Index falls nicht eingeloggt
   if (!user.value) {
     console.log('No user is logged in');
     router.push('/');
+
+  // Immer auf eigene Seite umleiten (url = user id)
   } else if (user.value.id !== route.params.id) {
     console.log('User ID does not match route parameter');
     router.push(`/page/${user.value.id}`);
+
+  // Standardfall: Nutzer ist auf eigener Seite und eingeloggt
   } else {
     console.log('User is logged in:', user.value);
+    tableStore.fetchData(); // Daten gleich beim mounten holen; Pinia Store für Datentabelle (Supabase)
   }
 });
 
+// Formular submitten - Button (an Supabase)
 const submitTravel = async () => {
+  // Pflichtfelder
   if (!country.value || !year.value || !highlight.value || !score.value) {
     alert('Please fill out all fields');
     return;
@@ -100,21 +129,38 @@ const submitTravel = async () => {
     alert('Submission failed: ' + error.message);
   } else {
     alert('Travel data submitted successfully!');
-    // Optionally clear the form
+    tableStore.fetchData(); // Nach erfolgreicher submission Daten für Tabelle fetchen
+
+    // Felder zurücksetzen
     country.value = '';
     year.value = new Date().getFullYear();
     highlight.value = 'Nature';
-    score.value = 1;
+    score.value = 10;
   }
+};
+
+// Pinia Store für Datentabelle (Supabase)
+import {useTableStore} from "~/stores/datatable.js";
+const tableStore = useTableStore()
+await callOnce(tableStore.fetchData)
+
+// Navigate to Edit Page
+const goToEditPage = () => {
+  router.push(`/page/${user.value.id}/edit`);
 };
 
 </script>
 
+<!-- Styling -->
 <style scoped>
 #route-id {
   padding: 8px;
   font-size: 20px;
   font-weight: bold;
+}
+
+#data-table-container {
+  margin-top: 32px;
 }
 
 .travel-form {
@@ -150,6 +196,6 @@ const submitTravel = async () => {
 }
 
 .travel-form button:hover {
-  background-color: #800000;
+  background-color: rgb(98, 0, 0);
 }
 </style>
