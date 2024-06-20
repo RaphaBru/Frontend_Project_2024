@@ -59,7 +59,7 @@
 
           <!-- Wenn die Tabelle leer ist: -->
           <div v-else id="data-table-container">
-            Let's get started with your travel journal!
+            Let's get started with your Travel Journal!
           </div>
 
         </div>
