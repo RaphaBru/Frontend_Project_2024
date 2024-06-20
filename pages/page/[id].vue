@@ -91,7 +91,7 @@ const submitTravel = async () => {
       year: parseInt(year.value, 10),
       highlight: highlight.value,
       score: parseInt(score.value, 10),
-      user: user.value.id,
+      user_id: user.value.id,
       created_at: new Date().toISOString(),
     },
   ]);
