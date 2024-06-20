@@ -22,14 +22,14 @@
 
                 <label for="highlight">Highlight:</label>
                 <select v-model="entry.highlight">
-                  <option>Nature</option>
-                  <option>Food</option>
-                  <option>Culture</option>
-                  <option>Shopping</option>
                   <option>Activities</option>
-                  <option>Nightlife</option>
-                  <option>Sports</option>
+                  <option>Culture</option>
+                  <option>Food</option>
                   <option>Local People</option>
+                  <option>Nature</option>
+                  <option>Nightlife</option>
+                  <option>Shopping</option>
+                  <option>Sports</option>
                 </select>
 
                 <label for="score">Score:</label>

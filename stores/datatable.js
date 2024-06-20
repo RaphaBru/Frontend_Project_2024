@@ -3,6 +3,7 @@ import { ref } from "vue";
 
 export const useTableStore = defineStore('tableStore', () => {
     const tableData = ref([]);
+    const filteredData = ref([]);
 
     async function fetchData() {
         const client = useSupabaseClient();
@@ -12,6 +13,8 @@ export const useTableStore = defineStore('tableStore', () => {
             .limit(200);
         if (data) {
             tableData.value = data;
+            // Filter out the 'id' field
+            filteredData.value = data.map(({ id, ...rest }) => rest);
         } else {
             console.error('Error when fetching the data:', error);
         }
@@ -37,5 +40,5 @@ export const useTableStore = defineStore('tableStore', () => {
         }
     }
 
-    return { tableData, fetchData, updateRow, deleteRow };
+    return { tableData, filteredData, fetchData, updateRow, deleteRow };
 });

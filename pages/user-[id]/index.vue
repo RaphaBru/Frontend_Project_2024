@@ -21,14 +21,14 @@
             <div>
               <label for="highlight">Highlight:</label>
               <select id="highlight" v-model="highlight">
-                <option>Nature</option>
-                <option>Food</option>
-                <option>Culture</option>
-                <option>Shopping</option>
                 <option>Activities</option>
-                <option>Nightlife</option>
-                <option>Sports</option>
+                <option>Culture</option>
+                <option>Food</option>
                 <option>Local People</option>
+                <option>Nature</option>
+                <option>Nightlife</option>
+                <option>Shopping</option>
+                <option>Sports</option>
               </select>
             </div>
             <div>
@@ -44,10 +44,10 @@
 
           <!-- Tabelle (Pinia Store, Supabase) -->  
           <!-- Nur anzeigen wenn Tabelle nicht leer ist -->
-          <div v-if="tableStore.tableData && tableStore.tableData.length">
+          <div v-if="tableStore.filteredData && tableStore.filteredData.length">
 
             <UCard id="data-table-container"> 
-              <UTable id="data-table" :rows="tableStore.tableData"/>
+              <UTable id="data-table" :rows="tableStore.filteredData"/>
             </UCard>
 
             <!-- Edit Entries Button -->
@@ -92,7 +92,7 @@ const client = useSupabaseClient();
 // Datenformular
 const country = ref('');
 const year = ref(new Date().getFullYear());
-const highlight = ref('Nature');
+const highlight = ref('Activities');
 const score = ref(10);
 
 onMounted(() => {
