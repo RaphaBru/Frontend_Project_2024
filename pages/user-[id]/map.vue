@@ -74,6 +74,16 @@ const changeColor = () => {
   });
 };
 
+// Sicherstellen, dass die Farbe gewechselt wird nachdem die daten geladen sind.
+watch(
+  () => mapStore.mapData,
+  (newVal, oldVal) => {
+    if (newVal !== oldVal) {
+      changeColor();
+    }
+  },
+  { immediate: true, deep: true }
+);
 
 onMounted(() => {
   // Umleiten auf Index falls nicht eingeloggt
@@ -90,7 +100,6 @@ onMounted(() => {
   } else {
     console.log('User is logged in:', user.value);
     mapStore.fetchData();
-    changeColor();
   }
 });
 
