@@ -82,7 +82,7 @@ watch(
       changeColor();
     }
   },
-  { immediate: true, deep: true }
+  { immediate: true, deep: true, flush: 'post' }
 );
 
 onMounted(() => {
@@ -103,11 +103,6 @@ onMounted(() => {
   }
 });
 
-// Navigate to User Page
-const goToUserPage = () => {
-  router.push(`/user-${user.value.id}`);
-};
-
 </script>
 
 <style scoped>
@@ -122,16 +117,6 @@ const goToUserPage = () => {
 .svg-wrapper {
   max-width: auto;
   border: 1.5px solid maroon; /* Adds a black border around the container */
-}
-
-.return-to-user-page button{
-  margin-top: 12px;
-  background-color: maroon;
-  color: white;
-}
-
-.return-to-user-page button:hover{
-  background-color: rgb(98, 0, 0);
 }
 
 </style>

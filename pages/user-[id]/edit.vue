@@ -12,14 +12,14 @@
           <div class="edit-entries">
             <div v-for="entry in tableStore.tableData" :key="entry.id" class="edit-entry">
               <div class="edit-fields">
-                <label for="country">Country:</label>
-                <input type="text" v-model="entry.country" placeholder="Country" />
+                <label :for="'country-' + entry.id">Country:</label>
+                <input :id="'country-' + entry.id" type="text" v-model="entry.country" placeholder="Country" />
 
-                <label for="year">Year:</label>
-                <input type="number" v-model="entry.year" placeholder="Year" />
+                <label :for="'year-' + entry.id">Year:</label>
+                <input :id="'year-' + entry.id" type="number" v-model="entry.year" placeholder="Year" />
 
-                <label for="highlight">Highlight:</label>
-                <select v-model="entry.highlight">
+                <label :for="'highlight-' + entry.id">Highlight:</label>
+                <select :id="'highlight-' + entry.id" v-model="entry.highlight">
                   <option>Activities</option>
                   <option>Culture</option>
                   <option>Food</option>
@@ -30,8 +30,8 @@
                   <option>Sports</option>
                 </select>
 
-                <label for="score">Score:</label>
-                <select v-model="entry.score">
+                <label :for="'score-' + entry.id">Score:</label>
+                <select :id="'score-' + entry.id" v-model="entry.score">
                   <option v-for="n in 10" :key="n" :value="n">{{ n }}</option>
                 </select>
               </div>
@@ -90,11 +90,6 @@ await callOnce(tableStore.fetchData);
 
 const hasFourOrMoreEntries = computed(() => tableStore.tableData.length >= 4);
 
-// Navigate to User Page
-const goToUserPage = () => {
-  router.push(`/user-${user.value.id}`);
-};
-
 const validateAndUpdateEntry = async (entry) => {
   if (!entry.country || !entry.year || !entry.highlight || !entry.score) {
     alert('All fields must be filled out');
@@ -126,17 +121,6 @@ const deleteEntry = async (id) => {
 </script>
 
 <style scoped>
-
-.return-to-user-page button{
-  margin-top: 12px;
-  background-color: maroon;
-  color: white;
-}
-
-.return-to-user-page button:hover{
-  background-color: rgb(98, 0, 0);
-}
-
 .edit-entries {
   margin-top: 20px;
 }
