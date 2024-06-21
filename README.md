@@ -6,6 +6,9 @@ Modul: Frontend Entwicklung
     <img src="./assets/sample_map_large.svg" alt="Mit der Webseite erstellte Karte" width="500" />
 </div> 
 
+Link zur Webseite:  
+https://frontend-project-2024.vercel.app/
+
 Auf dieser Webseite können Nutzer und Nutzerinnen ein Reisejournal anlegen.  
 
 Dieses Projekt wurde mit **Vue.js** und **Nuxt.js** erstellt. Für die Authentifizierung und Datenverwaltung wird **Supabase** verwendet.
