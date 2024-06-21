@@ -3,7 +3,7 @@ Ersteller: Raphael Brunold
 Modul: Frontend Entwicklung  
 
 <div align="center">
-    <img src="./Assets/sample_map_large.svg" alt="Mit der Webseite erstellte Karte" width="500" />
+    <img src="./assets/sample_map_large.svg" alt="Mit der Webseite erstellte Karte" width="500" />
 </div> 
 
 Auf dieser Webseite können Nutzer und Nutzerinnen ein Reisejournal anlegen.  
