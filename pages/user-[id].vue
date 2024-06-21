@@ -1,6 +1,7 @@
 <template>
   <div>
-    <NuxtPage />
+    <!-- Für das Nesting der Pfade. user-[id] wird zum index.vue im Unterordner -->
+    <NuxtPage /> 
   </div>
 </template>
 
