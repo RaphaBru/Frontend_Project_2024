@@ -94,7 +94,7 @@ await callOnce(tableStore.fetchData);
 
 const hasFourOrMoreEntries = computed(() => tableStore.tableData.length >= 4);
 
-// Navigate to Edit Page
+// Navigate to User Page
 const goToUserPage = () => {
   router.push(`/user-${user.value.id}`);
 };
@@ -138,10 +138,11 @@ const deleteEntry = async (id) => {
 
 .return-to-user-page button{
   margin-top: 12px;
+  background-color: maroon;
 }
 
-.return-to-user-page button{
-  background-color: maroon;
+.return-to-user-page button:hover{
+  background-color: rgb(98, 0, 0);
 }
 
 .edit-entries {
