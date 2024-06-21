@@ -1,59 +1,48 @@
-# Welcome to my Website!
+# Willkommen beim Projekt Traveller
+Ersteller: Raphael Brunold  
+Modul: Frontend Entwicklung  
 
-_________________
+<div align="center">
+    <img src="./Assets/sample_map_large.svg" alt="Mit der Webseite erstellte Karte" width="500" />
+</div> 
 
-# Nuxt UI Minimal Starter
+Auf dieser Webseite können Nutzer und Nutzerinnen ein Reisejournal anlegen.  
 
-This code serves as a template for the student project.
+Dieses Projekt wurde mit **Vue.js** und **Nuxt.js** erstellt. Für die Authentifizierung und Datenverwaltung wird **Supabase** verwendet.
 
-## Project Structure
+## Hauptfunktionalitäten
+- Registrierung & Login
+- Erfassen von Journaleinträgen
+- Erstellung einer Tabelle mit den Journaleinträgen
+- Editieren und Löschen von Einträgen
+- Erstellung einer Karte mit den besuchten Ländern
+- Testing mit Cypress
 
-Detailed description: https://nuxt.com/docs/getting-started/introduction
-
-### Folders and Files
-https://nuxt.com/docs/guide/directory-structure
-
-- /pages: https://nuxt.com/docs/getting-started/routing
-- /components: https://nuxt.com/docs/guide/directory-structure/components
-- /stores: https://nuxt.com/docs/getting-started/state-management#usage-with-pinia
-- /layouts: https://nuxt.com/docs/guide/directory-structure/layouts
-- /public: https://nuxt.com/docs/getting-started/assets#public-directory
-- /assets: https://nuxt.com/docs/getting-started/assets
-- /server: https://nuxt.com/docs/guide/directory-structure/server
-
-### Configuration Files
-nuxt.config.ts: https://nuxt.com/docs/getting-started/configuration#nuxt-configuration
-app.config.ts: https://nuxt.com/docs/getting-started/configuration#app-configuration
-
-### Environment Variables
-
-Configuration variables can be defined in the .env file. This file should never be checked in. 
-An example was created with .env.example .
-https://nuxt.com/docs/guide/directory-structure/env
-
-
-### Supabase 
-
-Description of how to set up and use Supabase.
-https://github.com/Interaktive-Medien/2023_HS_IM3
-
-The library @nuxtjs/supabase can be used to connect your nuxt project to Supabase.
-https://supabase.nuxtjs.org/get-started
+ ## Projektstruktur
+- **components** - Wiederverwendbare Komponenten
+- **layouts** - Wiederverwendbare Layouts
+- **stores** - Pinia Data Stores
+- **pages**
+    - **index.vue** - Landing Page mit Login & Registrierung
+    - **user-[id].vue** - Persönlicher Bereich mit dynamischem Routing
+    - **edit.vue** - Bearbeitung und Löschen von Einträgen
+    - **map.vue** - Visualisierung der Einträge auf einer Weltkarte
+- **cypress** - Automatisiertes End-to-End-Testing
+    - Der Login, das Erstellen, das Editieren und das Löschen von Einträgen wird automatisiert getestet.
+- **assets** - Verwendete Bilder
 
 ## Install
 
-Make sure to install the dependencies:
+Dependencies installieren:
 
 ```bash
-# npm
 npm install
 ```
 
 ## Development Server
 
-Start the development server on `http://localhost:3000`:
+Development Server starten auf `http://localhost:3000`:
 
 ```bash
-# npm
 npm run dev
 ```
