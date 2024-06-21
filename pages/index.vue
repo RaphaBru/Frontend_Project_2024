@@ -1,19 +1,17 @@
 <template>
-  <!-- https://nuxt.com/docs/guide/directory-structure/pages -->
   <NuxtLayout name="default-layout">
-    <!-- Komponente benötigt kein import in script. Wird automatisch von nuxt importiert -->
-    <header-example></header-example>
-    <div class="global-css">
-      <div><NuxtLink to="/page/1">Page 1</NuxtLink></div>
-      <div><NuxtLink to="/page/2">Page 2</NuxtLink></div>
+    <div class="intro-box">
+      Welcome to Traveller!<br>
+      Here you can create and manage your own Travel Journal.<br>
+      Make entries about the countries you have visited, and visualize your travels on a world map.
     </div>
-    <UCard id="data-table-container">
-      <UTable id="data-table" :rows="tableStore.tableData"/>
-    </UCard>
+    <div class="map-container">
+      <UCard id="sample-map" v-html="svgContent"></UCard>
+    </div>
 
     <!-- Display if user is logged in -->
     <div v-if="user" class="personal-page-container">
-      <button @click="goToPersonalPage" class="personal-page-button">Go to your page</button>
+      <button @click="goToPersonalPage" class="personal-page-button">Open my Travel Journal</button>
     </div>
 
     <!-- Login/Register Form if user is not logged in -->
@@ -23,7 +21,7 @@
         <input type="password" v-model="password" placeholder="Password" required />
         <button type="submit">{{ isLogin ? 'Login' : 'Register' }}</button>
       </form>
-      <button @click="toggleAuthMode">
+      <button class="auth-mode-button" @click="toggleAuthMode">
         {{ isLogin ? 'Need an account? Register' : 'Already have an account? Login' }}
       </button>
       <div>Log in to make your own Travel Journal!</div>
@@ -35,11 +33,8 @@
 <!-- START SCRIPT -->
 
 <script setup lang="js">
-
-// Beispiel: Daten aus Supabase Tabelle holen und anzeigen
-import {useTableStore} from "~/stores/datatable.js";
-const tableStore = useTableStore()
-await callOnce(tableStore.fetchData)
+import { ref } from 'vue';
+import svgRaw from '~/assets/sample_map.svg?raw';
 
 // Login
 const email = ref('');
@@ -86,23 +81,14 @@ const goToPersonalPage = () => {
   }
 };
 
-const logout = async () => {
-  const { error } = await client.auth.signOut();
-  if (error) {
-    alert('Logout failed: ' + error.message);
-  } else {
-    alert('Logout successful!');
-    router.push('/');
-  }
-};
-
+// SVG content
+const svgContent = ref(svgRaw);
 </script>
 
 <!-- END SCRIPT -->
 <!-- START STYLE -->
 
-<style lang="css" scoped>
-
+<style scoped>
 /* Login */
 .auth-container {
   margin-top: 32px;
@@ -126,7 +112,7 @@ const logout = async () => {
 
 .auth-container button {
   padding: 10px;
-  background-color: #007BFF;
+  background-color: maroon;
   color: white;
   border: none;
   border-radius: 4px;
@@ -134,7 +120,12 @@ const logout = async () => {
 }
 
 .auth-container button:hover {
-  background-color: #0056b3;
+  background-color: rgb(98, 0, 0);
+}
+
+.auth-mode-button {
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
 
 /* Personal Page Button */
@@ -150,20 +141,45 @@ const logout = async () => {
   border: none;
   border-radius: 4px;
   padding: 10px 20px;
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: bold;
   cursor: pointer;
 }
 
 .personal-page-button:hover {
-  background-color: #800000; /* Darker maroon for hover effect */
+  background-color: rgb(98, 0, 0); /* Darker maroon for hover effect */
 }
 
-/* Beispiel */
-#data-table-container {
-  margin-top: 32px;
+.intro-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 80%;
+  padding: 8px;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 12px auto;
+  border: 1px solid;
+  border-radius: 4px;
 }
 
-#data-table {
-  max-height: 500px;
+/* SVG Container */
+.map-container {
+  display: flex;
+  justify-content: center; /* Center the UCard horizontally */
+  align-items: center; /* Center the UCard vertically */
+  margin-top: 20px;
 }
+
+#sample-map {
+  margin-top: 24px;
+  padding: 10px;
+  max-width: 80%; /* Make sure the SVG is responsive */
+  box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
+  display: flex;
+  justify-content: center; /* Center the SVG horizontally */
+  align-items: center; /* Center the SVG vertically */
+}
+
 </style>

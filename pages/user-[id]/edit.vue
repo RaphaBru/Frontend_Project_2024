@@ -3,13 +3,11 @@
     <div id="route-id">
       <div v-if="user">
         <div v-if="user.id === route.params.id">
-          <div>
+          <div class="global-css">
             Edit your Travel Journal here.
           </div>
 
-          <div class="return-to-user-page">
-            <UButton icon="i-heroicons-arrow-left-end-on-rectangle" @click="goToUserPage">Return to my Journal</UButton>
-          </div>
+          <Journal_Button></Journal_Button>
 
           <div class="edit-entries">
             <div v-for="entry in tableStore.tableData" :key="entry.id" class="edit-entry">
@@ -45,9 +43,7 @@
           </div>
 
           <!-- Wenn viele Einträge vorhanden sind: zusätzlicher Return Button unten. -->
-          <div v-if="hasFourOrMoreEntries" class="return-to-user-page">
-            <UButton icon="i-heroicons-arrow-left-end-on-rectangle" @click="goToUserPage">Return to my Journal</UButton>
-          </div>
+          <Journal_Button v-if="hasFourOrMoreEntries"></Journal_Button>
 
         </div>
         <!-- Nutzer nicht auf eigener Seite -->
@@ -130,15 +126,11 @@ const deleteEntry = async (id) => {
 </script>
 
 <style scoped>
-#route-id {
-  padding: 8px;
-  font-size: 20px;
-  font-weight: bold;
-}
 
 .return-to-user-page button{
   margin-top: 12px;
   background-color: maroon;
+  color: white;
 }
 
 .return-to-user-page button:hover{
@@ -180,6 +172,7 @@ const deleteEntry = async (id) => {
 
 .edit-button-container button {
   background-color: maroon;
+  color: white;
 }
 
 .edit-button-container button:hover {

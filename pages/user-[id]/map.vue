@@ -3,13 +3,14 @@
     <div id="route-id">
       <div v-if="user">
         <div v-if="user.id === route.params.id">
-          <div>
-            Let's have a look where you've been!
+          <div class="global-css">
+            Let's take a look at where you've been!
           </div>
 
-          <div class="return-to-user-page">
+          <!-- <div class="return-to-user-page">
             <UButton icon="i-heroicons-arrow-left-end-on-rectangle" @click="goToUserPage">Return to my Journal</UButton>
-          </div>
+          </div> -->
+          <Journal_Button></Journal_Button>
 
           <div class="svg-container">
             <div class="svg-wrapper" v-html="svgContent"></div>
@@ -114,15 +115,10 @@ const goToUserPage = () => {
   border: 1.5px solid maroon; /* Adds a black border around the container */
 }
 
-#route-id {
-  padding: 8px;
-  font-size: 20px;
-  font-weight: bold;
-}
-
 .return-to-user-page button{
   margin-top: 12px;
   background-color: maroon;
+  color: white;
 }
 
 .return-to-user-page button:hover{

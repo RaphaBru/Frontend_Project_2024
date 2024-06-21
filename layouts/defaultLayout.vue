@@ -5,7 +5,15 @@
       <img :src="logo" alt="Logo" class="banner-logo">
     </NuxtLink>
     <span class="banner-title">Traveller</span>
-    <button v-if="user" @click="logout" class="logout-button">Logout</button>
+    <div v-if="user" class="navigation">
+      <select @change="handleAction($event)">
+        <option disabled selected value>Navigation</option>
+        <option value="journal">Travel Journal</option>
+        <option value="map">My Map</option>
+        <option value="edit">Edit Journal</option>
+        <option value="logout">Logout</option>
+      </select>
+    </div>
   </div>
   <UContainer>
     <slot/>
@@ -28,6 +36,21 @@ const logout = async () => {
     router.push('/');
   }
 };
+
+const handleAction = (event) => {
+  const action = event.target.value;
+  const userId = user.value.id;
+
+  if (action === 'journal') {
+    router.push(`/user-${userId}`);
+  } else if (action === 'map') {
+    router.push(`/user-${userId}/map`);
+  } else if (action === 'edit') {
+    router.push(`/user-${userId}/edit`);
+  } else if (action === 'logout') {
+    logout();
+  }
+};
 </script>
 
 <style scoped>
@@ -35,7 +58,7 @@ const logout = async () => {
   background-color: maroon;
   color: white;
   padding: 15px;
-  font-size: 24px;
+  font-size: 28px;
   font-weight: bold;
   display: flex;
   align-items: center;
@@ -52,16 +75,20 @@ const logout = async () => {
   text-align: center;
 }
 
-.logout-button {
+.navigation {
+  font-size: 20px;
+}
+
+.navigation select {
   background-color: grey;
   color: white;
   border: none;
   border-radius: 4px;
-  padding: 5px 10px;
+  padding: 5px 5px;
   cursor: pointer;
 }
 
-.logout-button:hover {
+.navigation select:hover {
   background-color: #5e6063;
 }
 
@@ -70,10 +97,8 @@ const logout = async () => {
     flex-direction: column;
   }
 
-  .logout-button {
+  .user-actions {
     margin-top: 10px;
-    position: static;
-    transform: none;
   }
 }
 </style>

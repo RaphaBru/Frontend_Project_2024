@@ -3,9 +3,15 @@
     <div id="route-id">
       <div v-if="user">
         <div v-if="user.id === route.params.id">
-          <div>
+          <div class = "global-css">
             Welcome!<br>
-            You are logged in as {{ user.email }}.
+            You are logged in with {{ user.email }}.<br>
+            On this page, you can create your personal Travel Journal.
+          </div>
+
+          <!-- Edit Entries Button -->
+          <div class="maps-container">
+            <UButton icon="i-heroicons-globe-europe-africa" @click="goToMapPage">Go to my Map</UButton>
           </div>
           
           <!-- Travel Input Form -->
@@ -155,20 +161,20 @@ const goToEditPage = () => {
   router.push(`/user-${user.value.id}/edit`);
 };
 
+// Navigate to Map Page
+const goToMapPage = () => {
+  router.push(`/user-${user.value.id}/map`);
+};
+
 </script>
 
 <!-- END SCRIPT -->
 <!-- START STYLE -->
 
 <style scoped>
-#route-id {
-  padding: 8px;
-  font-size: 20px;
-  font-weight: bold;
-}
 
 #data-table-container {
-  margin-top: 32px;
+  margin-top: 12px;
 }
 
 .travel-form {
@@ -208,7 +214,7 @@ const goToEditPage = () => {
 }
 
 .edit-entries-container {
-  margin-top: 11px;
+  margin-top: 12px;
 }
 
 .edit-entries-container button {
@@ -222,6 +228,24 @@ const goToEditPage = () => {
 }
 
 .edit-entries-container button:hover {
+  background-color: rgb(98, 0, 0);
+}
+
+.maps-container {
+  margin-top: 12px;
+}
+
+.maps-container button {
+  background-color: maroon;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px;
+  cursor: pointer;
+  align-self: flex-st art;
+}
+
+.maps-container button:hover {
   background-color: rgb(98, 0, 0);
 }
 
